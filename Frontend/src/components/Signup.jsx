@@ -1,25 +1,40 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Login.css";
+import "./Signup.css";
 
-const Login = () => {
+const Signup = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Login Successful!");
-    navigate("/");
+    navigate("/VerifyOTP");
   };
 
   return (
-    <div className="login-page"> {/* Wrapper added */}
-      <div className="login-container">
+    <div className="signup-page">
+      <div className="signup-container">
         <div className="card">
           <div className="left-section">
-            <h2>Login to Your Account</h2>
+            <h2>Create an Account</h2>
             <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                placeholder="First Name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                required
+              />
+              <input
+                type="text"
+                placeholder="Last Name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                required
+              />
               <input
                 type="email"
                 placeholder="Enter Email"
@@ -34,15 +49,16 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <button type="submit" className="login-btn">Login</button>
+              <button type="submit" className="signup-btn">Sign Up</button>
             </form>
             <div className="bottom-links">
-              <span onClick={() => navigate("/")} className="back-home">Back to Home</span>
-              <span onClick={() => navigate("/signup")} className="signup-text">New user? Sign up</span>
+              <span onClick={() => navigate("/login")} className="login-text">
+                Already have an account? Login
+              </span>
             </div>
           </div>
           <div className="right-section">
-            <img src="/li.jpg" alt="Login Illustration" />
+            <img src="/li.jpg" alt="Signup Illustration" />
           </div>
         </div>
       </div>
@@ -50,4 +66,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

@@ -119,9 +119,42 @@ authRouter.post("/login",async(req,res)=>{
  })
 
 
-
-
-
+ authRouter.get("/google",async(req,res)=>{
+  try {
+      const user = await User.findOne({ email: req.body.email });
+      if (user) {
+        const token = jwt.sign({ id: user._id }, process.env.secret);
+       
+        res
+          .cookie('access_token', token, { httpOnly: true })
+          .status(200)
+          .json(user);
+      } else {
+        const generatedPassword =
+          Math.random().toString(36).slice(-8) +
+          Math.random().toString(36).slice(-8);
+        const hashedPassword =await bcrypt.hash(generatedPassword, 10);
+        const newUser = new User({
+          firstName:
+            req.body.firstName,
+          lastName:
+           req.body.lastName,
+          email: req.body.email,
+          password: hashedPassword,
+          
+        });
+        await newUser.save();
+        const token = jwt.sign({ id: newUser._id }, process.env.secret);
+      //   const { password: pass, ...rest } = newUser._doc;
+        res
+          .cookie('access_token', token, { httpOnly: true })
+          .status(200)
+          .json(newUser);
+      }
+    }  catch(err){
+      res.status(400).send("error while login" + err.message);
+  }
+})
 
 
  module.exports=authRouter;
