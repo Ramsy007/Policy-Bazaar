@@ -9,9 +9,33 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/VerifyOTP");
+
+    try {
+      const response = await fetch("http://localhost:4000/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ firstName, lastName, emailId: email, password }),
+      });
+
+      const text = await response.text(); // Read response as text first
+
+      try {
+        const data = JSON.parse(text); // Try parsing as JSON
+        if (response.ok) {
+          alert(data.message);
+          navigate("/VerifyOTP");
+        } else {
+          alert(data.message || "Signup failed. Please try again.");
+        }
+      } catch {
+        alert("Unexpected response from the server: " + text);
+      }
+    } catch (error) {
+      console.error("Error signing up:", error);
+      alert("An error occurred. Please try again.");
+    }
   };
 
   return (
@@ -49,7 +73,9 @@ const Signup = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <button type="submit" className="signup-btn">Sign Up</button>
+              <button type="submit" className="signup-btn">
+                Sign Up
+              </button>
             </form>
             <div className="bottom-links">
               <span onClick={() => navigate("/login")} className="login-text">

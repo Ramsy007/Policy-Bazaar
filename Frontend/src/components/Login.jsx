@@ -1,24 +1,43 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"; // Import axios
 import "./Login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Login Successful!");
-    navigate("/");
+    setError(""); // Clear previous errors
+
+    try {
+      const response = await axios.post("http://localhost:4000/login", {
+        emailId: email,
+        password,
+      }, { withCredentials: true });
+
+      alert("Login Successful!");
+      
+      // Store token (if needed)
+      localStorage.setItem("token", response.data.token);
+
+      // Redirect to home page
+      navigate("/");
+    } catch (err) {
+      setError(err.response?.data || "Invalid credentials. Please try again.");
+    }
   };
 
   return (
-    <div className="login-page"> {/* Wrapper added */}
+    <div className="login-page">
       <div className="login-container">
         <div className="card">
           <div className="left-section">
             <h2>Login to Your Account</h2>
+            {error && <p className="error">{error}</p>} {/* Show error message */}
             <form onSubmit={handleSubmit}>
               <input
                 type="email"

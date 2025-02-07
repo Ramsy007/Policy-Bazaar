@@ -1,65 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import axios from "axios";
 
 const VerifyOtp = () => {
-  const [otp, setOtp] = useState(['', '', '', '', '', '']);
-  const navigate = useNavigate();
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
-  useEffect(() => {
-    const inputs = document.querySelectorAll('input[type="text"]');
-    inputs.forEach(input => {
-      input.addEventListener('input', handleInput);
-      input.addEventListener('keydown', handleKeyDown);
-      input.addEventListener('focus', handleFocus);
-      input.addEventListener('paste', handlePaste);
-    });
-  }, []);
-
-  const handleInput = (e) => {
-    const index = e.target.dataset.index;
+  const handleInput = (e, index) => {
     const value = e.target.value;
-
-    setOtp(prevOtp => {
-      const newOtp = [...prevOtp];
+    if (/^[0-9]?$/.test(value)) {
+      const newOtp = [...otp];
       newOtp[index] = value;
-      return newOtp;
-    });
+      setOtp(newOtp);
 
-    if (value && index < 5) {
-      document.querySelector(`input[data-index="${parseInt(index) + 1}"]`).focus();
-    }
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'Backspace' || e.key === 'Delete') {
-      const index = e.target.dataset.index;
-      if (index > 0) {
-        setOtp(prevOtp => {
-          const newOtp = [...prevOtp];
-          newOtp[index] = '';
-          return newOtp;
-        });
-        document.querySelector(`input[data-index="${parseInt(index) - 1}"]`).focus();
+      if (value && index < 5) {
+        document.querySelector(`[data-index='${index + 1}']`).focus();
       }
     }
   };
 
-  const handleFocus = (e) => {
-    e.target.select();
-  };
-
-  const handlePaste = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const text = e.clipboardData.getData('text');
-    if (/^\d{6}$/.test(text)) {
-      setOtp(text.split(''));
+    setMessage("");
+    setError("");
+
+    const enteredOtp = otp.join("");
+
+    if (enteredOtp.length !== 6) {
+      setError("Please enter all 6 digits of the OTP.");
+      return;
     }
-  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert('OTP Verified Successfully!');
-    navigate('/home'); 
+    try {
+      const response = await axios.post("http://localhost:4000/verify-otp", { emailId: email, otp: enteredOtp });
+      setMessage(response.data.message);
+    } catch (err) {
+      setError(err.response?.data?.message || "Something went wrong");
+    }
   };
 
   return (
@@ -71,6 +49,14 @@ const VerifyOtp = () => {
         </p>
       </header>
       <form id="otp-form" onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="Enter your email"
+          className="w-full mb-4 p-2 border rounded"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
         <div className="flex items-center justify-center gap-3">
           {otp.map((digit, index) => (
             <input
@@ -80,10 +66,12 @@ const VerifyOtp = () => {
               maxLength="1"
               data-index={index}
               value={digit}
-              onInput={handleInput}
+              onChange={(e) => handleInput(e, index)}
             />
           ))}
         </div>
+        {error && <p className="text-red-500 mt-2">{error}</p>}
+        {message && <p className="text-green-500 mt-2">{message}</p>}
         <div className="max-w-[260px] mx-auto mt-4">
           <button
             type="submit"
@@ -94,8 +82,11 @@ const VerifyOtp = () => {
         </div>
       </form>
       <div className="text-sm text-slate-500 mt-4">
-        Didn't receive code?{' '}
-        <a className="font-medium text-indigo-500 hover:text-indigo-600" href="#0">
+        Didn't receive code?{" "}
+        <a
+          className="font-medium text-indigo-500 hover:text-indigo-600"
+          href="#0"
+        >
           Resend
         </a>
       </div>

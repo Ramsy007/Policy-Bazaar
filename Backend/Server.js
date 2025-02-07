@@ -1,30 +1,43 @@
-const express =require("express");
-const {connectDb}=require("./config/database")
-
-
+const express = require("express");
+const { connectDb } = require("./config/database");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 const authRouter = require("./Router/auth");
- const app=express();
 
- app.use(express.json());
- app.use(cookieParser());
- app.use("/",authRouter);
- app.get("/",(req,res)=>{
-    res.send("hii from server")
-    
- })
+const app = express();
 
-  connectDb ()
-  .then(()=>{
-    console.log("database connection succesfully");
-    app.listen(4000,()=>{
-      console.log("server is running on  port 4000")
-   })
+// ✅ Configure CORS properly
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true, // Allow cookies & authentication headers
   })
-  .catch((err)=>{
-   console.error("database cannot be connected!")
-  });
- 
- 
+);
 
- 
+app.use(express.json());
+app.use(cookieParser());
+
+// ✅ Register Routes
+app.use("/", authRouter);
+
+app.get("/", (req, res) => {
+  res.send("Hi from server");
+});
+
+// ✅ Connect to Database and Start Server
+const startServer = async () => {
+  try {
+    await connectDb();
+    console.log("✅ Database connected successfully");
+
+    app.listen(4000, () => {
+      console.log("🚀 Server is running on port 4000");
+    });
+  } catch (error) {
+    console.error("❌ Database connection failed:", error);
+    process.exit(1); // Exit the process if the DB connection fails
+  }
+};
+
+// ✅ Start the Server
+startServer();
