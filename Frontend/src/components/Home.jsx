@@ -17,6 +17,7 @@ const products = [
 
 const Home = () => {
   return (
+    
     <div className="min-h-screen flex flex-col items-center bg-gray-100 p-6">
       {/* Heading */}
       <h2 className="text-2xl font-bold text-gray-800 mb-6">Explore Our Insurance & Investment Plans</h2>

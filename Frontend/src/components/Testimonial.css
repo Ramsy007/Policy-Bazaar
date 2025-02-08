@@ -1,0 +1,140 @@
+/* Background & container */
+.testimonial-container {
+  width: 80%;
+  margin: 40px auto;
+  text-align: center;
+  padding: 20px 0;
+  background: linear-gradient(135deg, #560BAD, #4361EE); /* Acko purple-blue */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: glowing 1.5s infinite alternate;
+}
+
+@keyframes glowing {
+  0% {
+    box-shadow: 0 0 8px rgba(86, 11, 173, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 16px rgba(67, 97, 238, 0.9);
+  }
+}
+
+.testimonial-container h2 {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  color: white;
+  font-weight: bold;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Testimonial carousel */
+.testimonial-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 15px 0;
+}
+
+.testimonial-grid {
+  display: flex;
+  gap: 15px;
+  transition: transform 0.5s ease-in-out;
+  width: 700px;
+}
+
+/* Testimonial card with Acko colors */
+.testimonial-card {
+  flex: 1;
+  background: linear-gradient(45deg, #8a52ff, #6f7aff); /* Light purple gradient */
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  min-height: 160px;
+  max-width: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: white;
+}
+
+.testimonial-card:hover {
+  transform: scale(1.05) rotate(1deg);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+.testimonial-card h3 {
+  margin-bottom: 8px;
+  font-size: 1.1em;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.testimonial-card p {
+  font-size: 0.9em;
+  font-style: italic;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Navigation Buttons */
+.nav-button {
+  background: linear-gradient(135deg, #560BAD, #4361EE); /* Acko purple-blue */
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 40px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 3px 10px rgba(67, 97, 238, 0.6);
+}
+
+.nav-button:hover {
+  background: linear-gradient(135deg, #4361EE, #3A0CA3);
+  transform: scale(1.15);
+  box-shadow: 0 5px 12px rgba(67, 97, 238, 0.8);
+}
+
+.left {
+  margin-right: 15px;
+}
+
+.right {
+  margin-left: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .testimonial-grid {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .testimonial-card {
+    max-width: 85%;
+  }
+
+  .nav-button {
+    font-size: 20px;
+    padding: 10px 22px;
+  }
+}
+
+@media (max-width: 600px) {
+  .testimonial-container h2 {
+    font-size: 1.6em;
+  }
+
+  .testimonial-card {
+    padding: 12px;
+  }
+
+  .nav-button {
+    font-size: 18px;
+    padding: 8px 20px;
+  }
+}

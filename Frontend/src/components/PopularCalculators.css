@@ -1,0 +1,123 @@
+/* Main container */
+.calculator-container {
+  text-align: center;
+  padding: 50px 20px;
+  font-family: "Poppins", sans-serif;
+  color: #333;
+}
+
+/* Title */
+.section-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+/* Description */
+.section-description {
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 0 auto 30px;
+  color: #555;
+}
+
+/* Cards container */
+.calculator-grid {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+/* Individual card */
+.calculator-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  width: 320px;
+  padding: 20px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Card hover effect */
+.calculator-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Header */
+.calculator-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 15px;
+}
+
+/* Icons */
+.icon {
+  font-size: 2rem;
+}
+
+/* List */
+.calculator-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.calculator-list li {
+  font-size: 1rem;
+  padding: 10px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.calculator-list li:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Arrow */
+.arrow {
+  font-size: 1.2rem;
+  font-weight: bold;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.calculator-list li:hover .arrow {
+  opacity: 1;
+}
+
+/* Button */
+.view-all-button {
+  margin-top: 30px;
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.view-all-button:hover {
+  background: #0056b3;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .calculator-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+}
