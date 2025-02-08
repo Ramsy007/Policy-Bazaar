@@ -1,11 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+import axios from "axios"; // Import axios for API call
 import "./PopularCalculators.css";
 
 const calculators = [
   {
     title: "Investment calculators",
     bgColor: "#FFEDE4",
-    icon: "📈", // Replace with an actual image if needed
+    icon: "📈",
     links: [
       "SIP Calculator",
       "Income Tax Calculator",
@@ -38,6 +40,26 @@ const calculators = [
 ];
 
 const PopularCalculators = () => {
+  const navigate = useNavigate();
+
+  // 🛠️ Function to handle calculator click
+  const handleCalculatorClick = async (calculatorName) => {
+    if (calculatorName === "SIP Calculator") {
+      try {
+        // Call backend API
+        const response = await axios.get("http://localhost:5173/SIPCalculator");
+        console.log("SIP Calculator API Response:", response.data);
+        // Navigate to the frontend SIP calculator page
+        navigate("/SIPCalculator");
+      } catch (error) {
+        console.error("Error fetching SIP Calculator data:", error);
+        alert("Error loading SIP Calculator. Try again later.");
+      }
+    } else {
+      alert(`${calculatorName} navigation not set up yet!`);
+    }
+  };
+
   return (
     <div className="calculator-container">
       <h2 className="section-title">Popular Calculators</h2>
@@ -53,7 +75,7 @@ const PopularCalculators = () => {
             </div>
             <ul className="calculator-list">
               {calc.links.map((link, idx) => (
-                <li key={idx}>
+                <li key={idx} onClick={() => handleCalculatorClick(link)} className="clickable">
                   {link} <span className="arrow">→</span>
                 </li>
               ))}

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import "./Testimonial.css";
+import "./Testimonial.css"; // Importing CSS
 
 const testimonials = [
   { name: "Neha Jain", review: "You are doing a great job. Proud to be a customer of LoanWalle." },
-  { name: "Ananth Narayan", review: "Thank you for facilitating and following up on the policy. " },
+  { name: "Ananth Raj", review: "Thank you for facilitating and following up on the policy." },
   { name: "Prabhat Yadav", review: "Thanking you very much for your support in getting our policy quickly." },
   { name: "Ravi Sharma", review: "Excellent service and quick response. Highly recommended for insurance needs." },
   { name: "Pooja Mehta", review: "A smooth process and very helpful staff. Thank you for your support!" },
-  { name: "Amit Verma", review: "Best policy options available. The process was seamless and easy to understand." },
-  { name: "Sanya Kapoor", review: "Great experience. The customer support was very responsive and helped me choose the best policy." },
+  { name: "Amit Verma", review: "Best policy options available." },
+  { name: "Sanya Kapoor", review: "Great experience. Amazing Customer Support!" },
   { name: "Rahul Malhotra", review: "Happy with the services provided. The assistance was detailed and helpful." },
   { name: "Meena Reddy", review: "Good customer support and smooth documentation process. Totally satisfied." },
 ];

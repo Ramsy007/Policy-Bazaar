@@ -33,7 +33,7 @@ const WhyLoanWalle = () => {
     <section className="why-loanwalle">
       <div className="content">
         <h2>
-          What makes <span className="highlight">LoanWalle</span> one of{" "}
+          What makes <span className="highlight">InsuranceWalle</span> one of{" "}
           <span className="highlight">India's favourite places</span> to{" "}
           <span className="highlight">get loans?</span>
         </h2>

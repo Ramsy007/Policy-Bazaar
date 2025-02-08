@@ -8,6 +8,7 @@ import Services from "./components/Services";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import VerifyOTP from "./components/VerifyOTP";
+import SIPCalculator from "./components/SIPCalculator";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="Login" element={<Login />} />
           <Route path="Signup" element={<Signup />} />  
           <Route path="VerifyOTP" element={<VerifyOTP />}/>
+          <Route path="SIPCalculator" element={<SIPCalculator />} />
         </Route>
       </Routes>
     </BrowserRouter>

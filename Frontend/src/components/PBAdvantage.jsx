@@ -1,11 +1,10 @@
 import React from "react";
 import "./PBAdvantage.css";
-import WhyLoanWalle from './WhyLoanWalle';
 
 const advantages = [
   {
     icon: "💰",
-    title: "One of the best Prices",
+    title: "Best Prices",
     description: "Guaranteed",
   },
   {
@@ -23,18 +22,13 @@ const advantages = [
     title: "Claims Support",
     description: "Made stress-free",
   },
-  {
-    icon: "😊",
-    title: "Happy to Help",
-    description: "Every day of the week",
-  },
 ];
 
 const PBAdvantage = () => {
   return (
     <section className="pb-advantage">
       <div className="advantage-content">
-        <h2>LoanWalle Advantages</h2>
+        <h2>InsuranceWalle Advantages</h2>
         <p>
           When you buy insurance from us, you get more than just financial
           safety. You also get: our promise of simplifying complex insurance

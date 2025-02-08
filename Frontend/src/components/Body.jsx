@@ -7,16 +7,19 @@ import PBAdvantage from "./PBAdvantage";
 import MobileApp from "./MobileApp";
 import Testimonial from "./Testimonial";
 import SupportSection from "./SupportSection";
+import Temp from "./Temp";
 
 const Body = () => {
   const location = useLocation();
 
   // Pages where components should be hidden
-  const hiddenPaths = ["/login", "/signup"];
+  const hiddenPaths = ["/login", "/signup", "/VerifyOTP", "/SIPCalculator"];
 
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
+
+      {!hiddenPaths.includes(location.pathname) && <Temp />}
 
       <div className="flex-grow flex items-center justify-center m-4 p-6">
         <Outlet /> {/* Only renders the current page, including Home when path is "/" */}

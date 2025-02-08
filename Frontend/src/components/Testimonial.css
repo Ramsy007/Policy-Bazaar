@@ -4,7 +4,7 @@
   margin: 40px auto;
   text-align: center;
   padding: 20px 0;
-  background: linear-gradient(135deg, #560BAD, #4361EE); /* Acko purple-blue */
+  background: linear-gradient(135deg, #a0e3b2, #89f2d1); /* Minty green & aqua */
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   animation: glowing 1.5s infinite alternate;
@@ -12,19 +12,19 @@
 
 @keyframes glowing {
   0% {
-    box-shadow: 0 0 8px rgba(86, 11, 173, 0.7);
+    box-shadow: 0 0 8px rgba(160, 227, 178, 0.7);
   }
   100% {
-    box-shadow: 0 0 16px rgba(67, 97, 238, 0.9);
+    box-shadow: 0 0 16px rgba(137, 242, 209, 0.9);
   }
 }
 
 .testimonial-container h2 {
-  font-size: 1.8em;
+  font-size: 2em;
   margin-bottom: 15px;
   color: white;
   font-weight: bold;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 /* Testimonial carousel */
@@ -37,23 +37,44 @@
   padding: 15px 0;
 }
 
+/* Navigation Buttons */
+.nav-button {
+  background: linear-gradient(135deg, #71d98a, #45c4a6);
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 12px 24px;
+  color: white;
+  border-radius: 50%;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 3px 10px rgba(137, 242, 209, 0.6);
+  margin: 0 20px; /* Added space between buttons and cards */
+}
+
+.nav-button:hover {
+  background: linear-gradient(135deg, #45c4a6, #1ea896);
+  transform: scale(1.2);
+  box-shadow: 0 6px 14px rgba(67, 97, 238, 0.8);
+}
+
+/* Testimonial grid */
 .testimonial-grid {
   display: flex;
-  gap: 15px;
+  gap: 20px;
   transition: transform 0.5s ease-in-out;
   width: 700px;
 }
 
-/* Testimonial card with Acko colors */
+/* Testimonial card */
 .testimonial-card {
   flex: 1;
-  background: linear-gradient(45deg, #8a52ff, #6f7aff); /* Light purple gradient */
-  padding: 15px;
+  background: linear-gradient(45deg, #b5e5c8, #83e2c0);
+  padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   text-align: center;
-  min-height: 160px;
-  max-width: 240px;
+  min-height: 180px;
+  max-width: 260px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -62,48 +83,21 @@
 }
 
 .testimonial-card:hover {
-  transform: scale(1.05) rotate(1deg);
+  transform: scale(1.05) rotate(2deg);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
 }
 
 .testimonial-card h3 {
-  margin-bottom: 8px;
-  font-size: 1.1em;
+  margin-bottom: 10px;
+  font-size: 1.2em;
   color: #fff;
   text-transform: uppercase;
 }
 
 .testimonial-card p {
-  font-size: 0.9em;
+  font-size: 1em;
   font-style: italic;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-/* Navigation Buttons */
-.nav-button {
-  background: linear-gradient(135deg, #560BAD, #4361EE); /* Acko purple-blue */
-  border: none;
-  font-size: 22px;
-  cursor: pointer;
-  padding: 10px 20px;
-  color: white;
-  border-radius: 40px;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 3px 10px rgba(67, 97, 238, 0.6);
-}
-
-.nav-button:hover {
-  background: linear-gradient(135deg, #4361EE, #3A0CA3);
-  transform: scale(1.15);
-  box-shadow: 0 5px 12px rgba(67, 97, 238, 0.8);
-}
-
-.left {
-  margin-right: 15px;
-}
-
-.right {
-  margin-left: 15px;
 }
 
 /* Responsive Design */
@@ -119,8 +113,9 @@
   }
 
   .nav-button {
-    font-size: 20px;
+    font-size: 24px;
     padding: 10px 22px;
+    margin: 10px;
   }
 }
 
@@ -130,11 +125,11 @@
   }
 
   .testimonial-card {
-    padding: 12px;
+    padding: 14px;
   }
 
   .nav-button {
-    font-size: 18px;
+    font-size: 22px;
     padding: 8px 20px;
   }
 }

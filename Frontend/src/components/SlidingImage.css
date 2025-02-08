@@ -1,0 +1,39 @@
+.image-container {
+    position: fixed;
+    right: -100%;
+    bottom: 50px;
+    transition: right 1s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  .sliding-image {
+    width: 300px;
+    height: auto;
+    transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
+  }
+  
+  .text-overlay {
+    position: absolute;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  /* When image is fully visible */
+  .image-container.expanded {
+    right: 20px;
+    width: 50%;
+    height: auto;
+  }
+  
+  .image-container.expanded .sliding-image {
+    width: 50%;
+    height: auto;
+  }
+  
