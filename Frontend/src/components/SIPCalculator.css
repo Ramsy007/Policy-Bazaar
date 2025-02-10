@@ -1,47 +1,112 @@
 .sip-container {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
+  background: white;
   border-radius: 10px;
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  text-align: center;
+  padding: 25px;
+  width: 500px;  /* Fixed width */
+  min-height: 480px; /* Fixed height */
+  margin: auto;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-h1 {
-  color: #fff;
-  font-size: 24px;
+.sip-header {
+  display: flex;
+  justify-content: start;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
-.input-group {
-  margin-bottom: 15px;
-}
-
-label {
-  display: block;
-  font-weight: bold;
-  color: #fff;
-  margin-bottom: 5px;
-}
-
-input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 5px;
+.sip-header button {
+  padding: 10px 20px;
   border: none;
+  border-radius: 20px;
+  background: #f0f4ff;
+  color: #3b82f6;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sip-header .active {
+  background: #d1f3eb;
+  color: #14a76c;
+}
+
+.sip-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.sip-input {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.sip-input label {
+  font-size: 14px;
+  color: #555;
+  font-weight: bold;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-group input[type="number"] {
+  width: 100px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
   font-size: 16px;
 }
 
-.result {
-  margin-top: 20px;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
+.input-group input[type="range"] {
+  flex-grow: 1;
 }
 
-.highlight {
+.sip-results {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.sip-values {
+  font-size: 14px;
+  width: 40%;
+}
+
+.sip-values p {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sip-values span {
   font-weight: bold;
-  font-size: 18px;
-  color: #fff;
+  color: #333;
+}
+
+.invest-now {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  background: #14a76c;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.invest-now:hover {
+  background: #0f7a54;
 }

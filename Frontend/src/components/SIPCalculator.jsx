@@ -1,45 +1,116 @@
-import { useState } from "react";
-import "./SipCalculator.css";
+import React, { useState } from "react";
+import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import "./SIPCalculator.css";
 
-const SipCalculator = () => {
-  const [monthlyInvestment, setMonthlyInvestment] = useState(10000);
-  const [years, setYears] = useState(10);
-  const [annualReturn, setAnnualReturn] = useState(12);
+const SIPCalculator = () => {
+  const [monthlyInvestment, setMonthlyInvestment] = useState(25000);
+  const [returnRate, setReturnRate] = useState(12);
+  const [timePeriod, setTimePeriod] = useState(10);
 
-  const calculateSIP = () => {
-    const monthlyRate = annualReturn / 12 / 100;
-    const months = years * 12;
-    const futureValue =
-      monthlyInvestment * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate);
-    return futureValue;
+  // SIP Calculation Formula
+  const calculateSIPReturns = () => {
+    const n = timePeriod * 12; // Total months
+    const r = returnRate / 100 / 12; // Monthly interest rate
+    const investedAmount = monthlyInvestment * n;
+    const futureValue = monthlyInvestment * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
+    const estimatedReturns = futureValue - investedAmount;
+    return { investedAmount, estimatedReturns, totalValue: futureValue };
   };
 
-  const totalWealth = calculateSIP().toFixed(2);
-  const totalInvestment = (monthlyInvestment * 12 * years).toFixed(2);
-  const wealthGained = (totalWealth - totalInvestment).toFixed(2);
+  const { investedAmount, estimatedReturns, totalValue } = calculateSIPReturns();
+
+  const data = [
+    { name: "Invested Amount", value: investedAmount, color: "#E3E7FD" },
+    { name: "Est. Returns", value: estimatedReturns, color: "#3B82F6" },
+  ];
 
   return (
     <div className="sip-container">
-      <h1>SIP Calculator</h1>
-      <div className="input-group">
-        <label>Monthly Investment (₹)</label>
-        <input type="number" value={monthlyInvestment} onChange={(e) => setMonthlyInvestment(+e.target.value)} />
+      <div className="sip-header">
+        <button className="active">SIP</button>
+        <button>Lumpsum</button>
       </div>
-      <div className="input-group">
-        <label>Investment Duration (Years)</label>
-        <input type="number" value={years} onChange={(e) => setYears(+e.target.value)} />
+
+      <div className="sip-controls">
+        {/* Monthly Investment */}
+        <div className="sip-input">
+          <label>Monthly investment (₹)</label>
+          <div className="input-group">
+            <input 
+              type="number" 
+              value={monthlyInvestment} 
+              onChange={(e) => setMonthlyInvestment(Number(e.target.value))}
+              min="500" max="100000" step="500"
+            />
+            <input 
+              type="range" 
+              min="500" max="100000" step="500" 
+              value={monthlyInvestment} 
+              onChange={(e) => setMonthlyInvestment(Number(e.target.value))}
+            />
+          </div>
+        </div>
+
+        {/* Expected Return Rate */}
+        <div className="sip-input">
+          <label>Expected return rate (p.a.)</label>
+          <div className="input-group">
+            <input 
+              type="number" 
+              value={returnRate} 
+              onChange={(e) => setReturnRate(Number(e.target.value))}
+              min="1" max="30" step="0.1"
+            />
+            <input 
+              type="range" 
+              min="1" max="30" step="0.1" 
+              value={returnRate} 
+              onChange={(e) => setReturnRate(Number(e.target.value))}
+            />
+          </div>
+        </div>
+
+        {/* Time Period */}
+        <div className="sip-input">
+          <label>Time period (Years)</label>
+          <div className="input-group">
+            <input 
+              type="number" 
+              value={timePeriod} 
+              onChange={(e) => setTimePeriod(Number(e.target.value))}
+              min="1" max="30" step="1"
+            />
+            <input 
+              type="range" 
+              min="1" max="30" step="1" 
+              value={timePeriod} 
+              onChange={(e) => setTimePeriod(Number(e.target.value))}
+            />
+          </div>
+        </div>
       </div>
-      <div className="input-group">
-        <label>Expected Annual Return (%)</label>
-        <input type="number" value={annualReturn} onChange={(e) => setAnnualReturn(+e.target.value)} />
+
+      <div className="sip-results">
+        <PieChart width={200} height={200}>
+          <Pie data={data} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={60}>
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={entry.color} />
+            ))}
+          </Pie>
+          <Tooltip />
+          <Legend />
+        </PieChart>
+
+        <div className="sip-values">
+          <p>Invested amount <span>₹{investedAmount.toLocaleString()}</span></p>
+          <p>Est. returns <span>₹{estimatedReturns.toLocaleString()}</span></p>
+          <p><strong>Total value</strong> <span><strong>₹{totalValue.toLocaleString()}</strong></span></p>
+        </div>
       </div>
-      <div className="result">
-        <p>Total Investment: <span className="highlight">₹{totalInvestment}</span></p>
-        <p>Wealth Gained: <span className="highlight">₹{wealthGained}</span></p>
-        <p>Total Wealth: <span className="highlight">₹{totalWealth}</span></p>
-      </div>
+
+      <button className="invest-now">INVEST NOW</button>
     </div>
   );
 };
 
-export default SipCalculator;
+export default SIPCalculator;

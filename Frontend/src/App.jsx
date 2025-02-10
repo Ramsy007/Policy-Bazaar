@@ -9,6 +9,8 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import VerifyOTP from "./components/VerifyOTP";
 import SIPCalculator from "./components/SIPCalculator";
+import IncomeTaxCalculator from "./components/IncomeTaxCalculator";
+import ULIPCalculator from "./components/ULIPCalculator";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route path="Signup" element={<Signup />} />  
           <Route path="VerifyOTP" element={<VerifyOTP />}/>
           <Route path="SIPCalculator" element={<SIPCalculator />} />
+          <Route path = "IncomeTaxCalculator" element = {<IncomeTaxCalculator/>}/>
+           <Route path ="ULIPCalculator" element = {<ULIPCalculator />}/> 
         </Route>
       </Routes>
     </BrowserRouter>

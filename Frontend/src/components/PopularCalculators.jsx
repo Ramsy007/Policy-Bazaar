@@ -44,19 +44,21 @@ const PopularCalculators = () => {
 
   // 🛠️ Function to handle calculator click
   const handleCalculatorClick = async (calculatorName) => {
-    if (calculatorName === "SIP Calculator") {
-      try {
-        // Call backend API
+    try {
+      if (calculatorName === "SIP Calculator") {
         const response = await axios.get("http://localhost:5173/SIPCalculator");
         console.log("SIP Calculator API Response:", response.data);
-        // Navigate to the frontend SIP calculator page
         navigate("/SIPCalculator");
-      } catch (error) {
-        console.error("Error fetching SIP Calculator data:", error);
-        alert("Error loading SIP Calculator. Try again later.");
+      } else if (calculatorName === "Income Tax Calculator") {
+        navigate("/IncomeTaxCalculator");
+      } else if (calculatorName === "ULIP Calculator") {
+        navigate("/ULIPCalculator"); // ✅ Added navigation for ULIP Calculator
+      } else {
+        alert(`${calculatorName} navigation not set up yet!`);
       }
-    } else {
-      alert(`${calculatorName} navigation not set up yet!`);
+    } catch (error) {
+      console.error(`Error loading ${calculatorName}:`, error);
+      alert(`Error loading ${calculatorName}. Try again later.`);
     }
   };
 
@@ -83,7 +85,6 @@ const PopularCalculators = () => {
           </div>
         ))}
       </div>
-      <button className="view-all-button">View All Calculators</button>
     </div>
   );
 };

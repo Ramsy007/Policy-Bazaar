@@ -8,12 +8,15 @@ import MobileApp from "./MobileApp";
 import Testimonial from "./Testimonial";
 import SupportSection from "./SupportSection";
 import Temp from "./Temp";
+import IncomeTaxCalculator from "./IncomeTaxCalculator";
+import ULIPCalculator from "./ULIPCalculator";
+
 
 const Body = () => {
   const location = useLocation();
 
   // Pages where components should be hidden
-  const hiddenPaths = ["/login", "/signup", "/VerifyOTP", "/SIPCalculator"];
+  const hiddenPaths = ["/login", "/signup", "/VerifyOTP", "/SIPCalculator","/IncomeTaxCalculator","/ULIPCalculator"];
 
   return (
     <div className="flex flex-col min-h-screen">
